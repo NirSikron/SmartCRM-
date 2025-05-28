@@ -1,4 +1,6 @@
 <?php
+$pageTitle = "SmartCRM - AI Chat "; // או כל שם מותאם לעמוד הזה
+
 require "navbar.php"; // טעינת הניווט העליון
 if (!isset($_SESSION['is_admin'])) {
     header("Location: index.php"); // הגנה למשתמשים לא מחוברים

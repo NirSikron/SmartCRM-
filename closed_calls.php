@@ -1,4 +1,6 @@
 <?php
+$pageTitle = "קריאות סגורות"; // או כל שם מותאם לעמוד הזה
+
 require "navbar.php";
 if (!isset($_SESSION['is_admin'])) {
     header("Location: index.php");

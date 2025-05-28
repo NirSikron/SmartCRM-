@@ -16,10 +16,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><?php echo isset($pageTitle) ? $pageTitle : "SMART CRM"; ?></title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <title>Centered Navbar</title>
-</head>
 <body class="bg-gray-200">
   <nav class="bg-gray-900 text-white p-4 flex justify-between items-center">
     <div class="flex items-center space-x-4">
@@ -34,11 +33,6 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             <a href="admin.php" class="hover:text-gray-300 flex items-center space-x-3">
                 <i class="fas fa-home"></i>
                 <span>דף הבית</span>
-            </a>
-            <a href="closed_calls.php" class="hover:text-gray-300 flex items-center space-x-3">
-            <i class="fas fa-briefcase"></i>
-            <span>קריאות סגורות</span>
-        </a>
         
         <a href="CallMange.php" class="hover:text-gray-300 flex items-center space-x-3">
             <i class="fas fa-phone"></i>
@@ -56,13 +50,11 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         <a href="OpenCall.php" class="hover:text-gray-300 flex items-center space-x-3">
             <i class="fas fa-briefcase"></i>
             <span>פתיחת קריאה </span>
-        </a>
+        <a href="<?php echo isset($_SESSION['is_admin']) && $_SESSION['is_admin'] ? 'closed_calls.php' : 'previous_calls.php'; ?>" class="hover:text-gray-300 flex items-center space-x-3">
+    <i class="fas fa-briefcase"></i>
+    <span>קריאות סגורות</span>
+</a>
 
-             <a href="previous_calls.php" class="hover:text-gray-300 flex items-center space-x-3">
-            <i class="fas fa-briefcase"></i>
-            <span>קריאות סגורות  </span>
-        </a>
-      
 
  <?php if ($_SESSION['is_admin'] == 0)
         { ?>

@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "דף הבית"; // או כל שם מותאם לעמוד הזה
 
 require "navbar.php";
 

@@ -76,100 +76,114 @@ try {
     die("שגיאת חיבור לשרת: " . $e->getMessage());
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>דף התחברות</title>
+  <title>SMART CRM - התחברות</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, rgb(254, 199, 79), rgb(147, 154, 251));
-      display: flex;
-      align-items: center;
-      justify-content: center;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: linear-gradient(to right, #ffd466, #b99df0);
+      background-image: url("uploads/LOGOCRM.png"); /* שים פה את הרקע החדש ללא לוגו */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center top;
+      padding-top: 30px;
     }
+
+    .logo {
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      max-width: 220px;
+      height: auto;
+    }
+
     .container {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      max-width: 660px;
+      width: 90%;
       text-align: center;
     }
+
     h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: bold;
+      color: #002b5c;
       margin-bottom: 1.5rem;
     }
+
     label {
       display: block;
       text-align: right;
       margin-bottom: 0.5rem;
       font-size: 0.9rem;
-      color: #333;
+      color: #003366;
     }
+
     input {
       width: 100%;
       padding: 0.8rem;
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       border-radius: 6px;
       margin-bottom: 1rem;
       font-size: 0.9rem;
       text-align: right;
+      background-color: #f9f9f9;
     }
+
     input:focus {
-      border-color: #4facfe;
+      border-color: #004a99;
       outline: none;
-      box-shadow: 0 0 4px rgba(79, 172, 254, 0.6);
+      box-shadow: 0 0 5px rgba(0, 74, 153, 0.5);
     }
-    .forgot-password {
-      text-align: right;
-      font-size: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-    .forgot-password a {
-      color: #4facfe;
-      text-decoration: none;
-    }
-    .forgot-password a:hover {
-      text-decoration: underline;
-    }
+
     .login-button {
       width: 100%;
-      padding: 0.8rem;
-      background: linear-gradient(to right, #4facfe, rgb(251, 244, 147));
+      padding: 0.9rem;
+      background: linear-gradient(to right, #004080, #0073e6);
       color: #fff;
       border: none;
       border-radius: 6px;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
-      margin-bottom: 1.5rem;
     }
+
     .login-button:hover {
-      opacity: 0.9;
+      opacity: 0.95;
     }
+
     .message {
       margin-bottom: 1.5rem;
       padding: 0.8rem;
       border-radius: 6px;
       font-size: 0.9rem;
     }
+
     .success {
       background-color: #d4edda;
       color: #155724;
     }
+
     .error {
       background-color: #f8d7da;
       color: #721c24;
     }
+
     .info {
       background-color: #d1ecf1;
       color: #0c5460;
@@ -177,25 +191,29 @@ try {
   </style>
 </head>
 <body>
+
+  <div class="logo">
+    <img src="uploads/LOGO1.png" alt="SMART CRM Logo">
+  </div>
+
   <div class="container">
     <h1>התחברות</h1>
-    <?php if ($message): ?>
+    <?php if (!empty($message)): ?>
       <div class="message <?php echo htmlspecialchars($messageClass); ?>">
         <?php echo htmlspecialchars($message); ?>
       </div>
     <?php endif; ?>
     <form method="post" action="">
       <input type="hidden" name="action" value="login">
-      <div>
-        <label for="worker_id">שם משתמש</label>
-        <input id="worker_id" name="worker_id" type="text" placeholder="הזן את שם המשתמש שלך" required>
-      </div>
-      <div>
-        <label for="password">סיסמה</label>
-        <input id="password" name="password" type="password" placeholder="הזן את הסיסמה שלך" required>
-      </div>
+      <label for="worker_id">שם משתמש</label>
+      <input id="worker_id" name="worker_id" type="text" placeholder="הזן את שם המשתמש שלך" required>
+
+      <label for="password">סיסמה</label>
+      <input id="password" name="password" type="password" placeholder="הזן את הסיסמה שלך" required>
+
       <button type="submit" class="login-button">התחבר</button>
     </form>
   </div>
+
 </body>
 </html>

@@ -1,4 +1,6 @@
 <?php
+$pageTitle = "ניהול קריאות"; // או כל שם מותאם לעמוד הזה
+
 require "navbar.php";
 if (!isset($_SESSION['is_admin'])) {
     header("Location: index.php");

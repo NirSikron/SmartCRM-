@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "איזור אישי"; // או כל שם מותאם לעמוד הזה
 
 require "navbar.php";
 

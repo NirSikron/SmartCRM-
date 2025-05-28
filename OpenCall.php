@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "פתיחת קריאה"; // או כל שם מותאם לעמוד הזה
 
 require "navbar.php";
 

@@ -1,4 +1,6 @@
 <?php
+$pageTitle = "צור קשר! "; // או כל שם מותאם לעמוד הזה
+
 require "navbar.php";
 
 if (!isset($_SESSION['is_admin'])) {
