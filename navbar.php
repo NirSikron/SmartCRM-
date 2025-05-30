@@ -69,6 +69,13 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             <span>Chat </span>
         </a>
 
+         <?php if ($_SESSION['is_admin'] == 1)
+        { ?>
+        <a href="messages.php" class="hover:text-gray-300 flex items-center space-x-3">
+            <i class="fas fa-phone"></i>
+            <span>הודעות </span>
+        </a>
+        <?php } ?>
         <a href="Contact.php" class="hover:text-gray-300 flex items-center space-x-3">
             <i class="fas fa-chair"></i>
             <span>צור קשר</span>

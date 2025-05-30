@@ -40,7 +40,7 @@ if (!isset($_SESSION['is_admin'])) {
     <!-- סרטון גדול במרכז הדף -->
     <div class="video-container">
         <video autoplay loop muted>
-            <source src="/CRM-Login/uploads/howToOpenCalls.mp4" type="video/mp4">
+            <source src="/SMART-CRM/uploads/howToOpenCalls.mp4" type="video/mp4">
             הדפדפן שלך לא תומך בוידאו.
         </video>
     </div>
