@@ -52,6 +52,7 @@ try {
                 ':date' => $dateOpened
             ]);
             $message = "הפנייה נוספה בהצלחה!";
+            $_POST = [];
         }
     }
 } catch (PDOException $e) {
@@ -186,8 +187,9 @@ date_default_timezone_set('Asia/Jerusalem');
         .message {
             text-align: center;
             color: green;
-            font-size: 16px;
-            margin-top: 15px;
+            font-size: 20px;
+            margin-top: 25px;
+            font-weight: bold;
         }
 
         .error {
