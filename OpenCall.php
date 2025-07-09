@@ -113,6 +113,7 @@ date_default_timezone_set('Asia/Jerusalem');
             padding: 20px;
             margin-right: 300px;
             margin-top: 50px;
+            position: relative;
         }
 
         header {
@@ -185,11 +186,17 @@ date_default_timezone_set('Asia/Jerusalem');
         }
 
         .message {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            left: 0;
             text-align: center;
-            color: green;
-            font-size: 20px;
-            margin-top: 25px;
-            font-weight: bold;
+            color: white;
+            background-color: #28a745;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-bottom: 10px;
         }
 
         .error {
@@ -223,6 +230,9 @@ date_default_timezone_set('Asia/Jerusalem');
 </head>
 <body>
     <div class="container">
+        <?php if ($message): ?>
+            <div class="message"><?php echo $message; ?></div>
+        <?php endif; ?>
         <header><h1>פורטל קריאות</h1></header>
         <h1>הוספת פנייה חדשה</h1>
         <form action="" method="POST" enctype="multipart/form-data">
@@ -254,9 +264,6 @@ date_default_timezone_set('Asia/Jerusalem');
             </div>
             <button type="submit">הוסף פנייה</button>
         </form>
-        <?php if ($message): ?>
-            <div class="message"><?php echo $message; ?></div>
-        <?php endif; ?>
     </div>
 </body>
 </html>
