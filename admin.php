@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "דף הבית"; // או כל שם מותאם לעמוד הזה
+$pageTitle = "דף הבית";       
 
 require "navbar.php";
 

@@ -1,5 +1,4 @@
 <?php
-// הגדרות חיבור לבסיס הנתונים
 $host = "localhost";
 $dbname = "crm";
 $username = "root";
@@ -9,10 +8,8 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // הפעלת Session
     session_start();
 
-    // משתנים להודעות (יזוהו דרך Session)
     $message = "";
     $messageClass = "";
 
@@ -21,12 +18,10 @@ try {
             $worker_id = $_POST['worker_id'];
             $password = $_POST['password'];
 
-            // הכנת השאילתה לבדיקת המשתמש והסיסמה בבסיס הנתונים
             $stmt = $pdo->prepare("SELECT full_name, is_admin FROM login WHERE worker_id = ? AND password = ?");
             $stmt->execute([$worker_id, $password]);
 
             if ($stmt->rowCount() > 0) {
-                // קבלת תוצאת `full_name` ו-`is_admin`
                 //שלוף תוצאה מהמסד אחרי שהרצת שאילתה (SELECT) – והיא מחזירה את המידע בצורת מערך אסוציאטיבי.
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 $is_admin = $user['is_admin'];
@@ -51,7 +46,6 @@ try {
                     exit;
                 }
             } else {
-                // נתונים שגויים
                 $_SESSION['message'] = "שם משתמש או סיסמה שגויים, אנא בדוק את פרטי ההתחברות";
                 $_SESSION['messageClass'] = "error";
             }
@@ -72,7 +66,6 @@ try {
         unset($_SESSION['messageClass']);
     }
 } catch (PDOException $e) {
-    // טיפול בשגיאות חיבור לבסיס הנתונים
     die("שגיאת חיבור לשרת: " . $e->getMessage());
 }
 ?>
@@ -92,7 +85,7 @@ try {
       align-items: center;
       justify-content: flex-start;
       background: linear-gradient(to right, #ffd466, #b99df0);
-      background-image: url("uploads/LOGOCRM.png"); /* שים פה את הרקע החדש ללא לוגו */
+      background-image: url("uploads/LOGOCRM.png"); 
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center top;

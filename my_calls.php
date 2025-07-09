@@ -1,5 +1,5 @@
 <?php
-
+$pageTitle = " הפניות שלי";  
 require "navbar.php";
 
 if (!isset($_SESSION['is_admin'])) {

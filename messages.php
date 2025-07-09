@@ -1,16 +1,11 @@
 <?php
+$pageTitle = "הודעות שהתקבלו";  
 require "navbar.php";
 
 if (!isset($_SESSION['is_admin'])) {
     header("Location: index.php");
     exit;
 }
-
-// התחברות למסד נתונים (אם לא קיים כבר בקובץ אחר)
-$host = "localhost";
-$dbname = "crm";
-$username = "root";
-$password = "";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

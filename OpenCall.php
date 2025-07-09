@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "פתיחת קריאה"; // או כל שם מותאם לעמוד הזה
+$pageTitle = "פתיתח פנייה"; 
 
 require "navbar.php";
 

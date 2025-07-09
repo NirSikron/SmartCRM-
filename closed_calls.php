@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "קריאות סגורות"; // או כל שם מותאם לעמוד הזה
+$pageTitle = "קריאות סגורות";   
 
 require "navbar.php";
 if (!isset($_SESSION['is_admin'])) {
@@ -25,7 +25,6 @@ try {
         padding: 0;
     }
     
-    /* עיצוב הכותרת */
     .header {
         background-color: #1a202c;
         color: white;
@@ -44,7 +43,6 @@ try {
         margin-top: 5px;
     }
 
-    /* עיצוב הטבלה */
     .table-container {
         margin-top: 0;
         padding: 20px;

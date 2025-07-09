@@ -1,9 +1,9 @@
 <?php
-$pageTitle = "SmartCRM - AI Chat "; // או כל שם מותאם לעמוד הזה
+$pageTitle = "SmartCRM - AI Chat ";       
 
-require "navbar.php"; // טעינת הניווט העליון
+require "navbar.php";  
 if (!isset($_SESSION['is_admin'])) {
-    header("Location: index.php"); // הגנה למשתמשים לא מחוברים
+    header("Location: index.php");   
     exit;
 }
 ?>
@@ -14,7 +14,7 @@ if (!isset($_SESSION['is_admin'])) {
     <title>צ'אט עם Gemini</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* עיצוב כללי לדף */
+        
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(120deg, #f8fafc 0%, #e2e8f0 100%);
@@ -22,7 +22,7 @@ if (!isset($_SESSION['is_admin'])) {
             padding: 0;
         }
 
-        /* אזור הצ'אט כולו, מתחת ל-navbar */
+       
         .main-chat-area {
             width: 100vw;
             height: calc(100vh - 70px); /* גובה דינמי לפי גובה ה-navbar */
@@ -79,7 +79,6 @@ if (!isset($_SESSION['is_admin'])) {
             background: transparent;
         }
 
-        /* שדה ההקלדה */
         #user-input {
             flex: 1;
             padding: 13px 16px;
@@ -97,7 +96,6 @@ if (!isset($_SESSION['is_admin'])) {
             border-color: #38b6ff;
         }
 
-        /* כפתור השליחה */
         #send-btn {
             background: linear-gradient(90deg, #38b6ff 0%, #45eeb3 100%);
             color: #fff;
@@ -110,7 +108,6 @@ if (!isset($_SESSION['is_admin'])) {
             transition: background 0.18s;
         }
 
-        /* אפקט ריחוף לכפתור */
         #send-btn:hover {
             background: linear-gradient(90deg, #38b6ff 10%, #34d399 100%);
         }
@@ -154,7 +151,6 @@ if (!isset($_SESSION['is_admin'])) {
 </div>
 
 <script>
-    // פונקציה שמוסיפה הודעה חדשה לצ'אט
     function addMessage(sender, text) {
         let box = document.getElementById('chat-box');
         const msgDiv = document.createElement('div');
@@ -176,7 +172,6 @@ if (!isset($_SESSION['is_admin'])) {
         input.disabled = true;
         document.getElementById('send-btn').disabled = true;
 
-        // תצוגת "עובד על זה..."
         addMessage('Gemini', '<span style="color:#999;">&#8987; עובד על זה...</span>');
 
         // שליחת הנתונים ל־gemini_chat_api.php

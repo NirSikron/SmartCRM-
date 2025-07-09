@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "מדריך לפתיחת קריאה "; // או כל שם מותאם לעמוד הזה
+$pageTitle = "מדריך לפתיחת קריאה ";
 
 require "navbar.php";
 

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "צור קשר! "; // או כל שם מותאם לעמוד הזה
+$pageTitle = "צור קשר! ";  
 
 require "navbar.php";
 

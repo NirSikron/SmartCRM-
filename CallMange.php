@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "ניהול קריאות"; // או כל שם מותאם לעמוד הזה
+$pageTitle = "ניהול קריאות"; 
 
 require "navbar.php";
 if (!isset($_SESSION['is_admin'])) {

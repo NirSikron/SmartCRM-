@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "קריאות סגורות"; // או כל שם מותאם לעמוד הזה
+$pageTitle = "קריאות סגורות"; 
 
 require "navbar.php";
 
