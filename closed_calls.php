@@ -24,30 +24,7 @@ try {
         margin: 0;
         padding: 0;
     }
-
-    /* עיצוב ה-Navbar */
-    .navbar {
-        background-color:rgb(12, 15, 20);
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0px 0px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .navbar a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        margin: 0 8px;
-        padding: 4px 8px;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
-    .navbar a:hover {
-        background-color:rgb(32, 70, 111);
-    }
-
+    
     /* עיצוב הכותרת */
     .header {
         background-color: #1a202c;

@@ -13,48 +13,54 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $message = "";
+    $imageError = "";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $workerId = $_POST['workerId'];
         $callContent = $_POST['callContent'];
         $urgentText = $_POST['urgent'];
-        
         $dateOpened = $_POST['dateOpened'];
         $imagePath = "";
 
-        // המרת הערך "כן"/"לא" ל-1/0
         $urgent = ($urgentText === 'כן') ? 1 : 0;
 
-        // העלאת תמונה (אם יש)
         $image = $_FILES['image'];
-        if ($image["name"] != "") {
-            $imageName = time() . '_' . $image['name'];
-            $imageTmpName = $image['tmp_name'];
-            $imagePath = 'uploads/' . $imageName;
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
 
-            move_uploaded_file($imageTmpName, $imagePath);
+        if ($image["name"] != "") {
+            $file_extension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
+
+            if (in_array($file_extension, $allowed_extensions)) {
+                $imageName = time() . '_' . $image['name'];
+                $imageTmpName = $image['tmp_name'];
+                $imagePath = 'uploads/' . $imageName;
+                move_uploaded_file($imageTmpName, $imagePath);
+            } else {
+                $imageError = "ניתן להעלות תמונות בלבד (jpg, jpeg, png, gif)";
+            }
         }
 
-        // הכנסת הנתונים למסד הנתונים
-        $stmt = $pdo->prepare("INSERT INTO calls (worker_id, Content_call, PICUTRE, IS_SOS,STATUS, DATE) 
-                                VALUES (:worker_id, :content_call, :picture, :is_sos,:Status, :date)");
-        $stmt->execute([
-            ':worker_id' => $workerId,
-            ':content_call' => $callContent,
-            ':picture' => $imagePath,
-            ':is_sos' => $urgent,
-            ':Status'=>"Open",
-            ':date' => $dateOpened
-        ]);
-
-        $message = "הפנייה נוספה בהצלחה!";
+        if (empty($imageError)) {
+            $stmt = $pdo->prepare("INSERT INTO calls (worker_id, Content_call, PICUTRE, IS_SOS, STATUS, DATE) 
+                                    VALUES (:worker_id, :content_call, :picture, :is_sos, :Status, :date)");
+            $stmt->execute([
+                ':worker_id' => $workerId,
+                ':content_call' => $callContent,
+                ':picture' => $imagePath,
+                ':is_sos' => $urgent,
+                ':Status' => "Open",
+                ':date' => $dateOpened
+            ]);
+            $message = "הפנייה נוספה בהצלחה!";
+        }
     }
 } catch (PDOException $e) {
     $message = "שגיאה: " . $e->getMessage();
 }
 
-date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
+date_default_timezone_set('Asia/Jerusalem');
 ?>
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -63,7 +69,6 @@ date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
     <title>הוספת פנייה</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-      
         .side-menu {
             width: 250px;
             background-color: #003d85;
@@ -74,7 +79,7 @@ date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
             position: fixed;
-            right: 0; /* מיקום בצד ימין */
+            right: 0;
             top: 0;
         }
 
@@ -105,7 +110,7 @@ date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin-right: 300px; /* מרווח מהתפריט */
+            margin-right: 300px;
             margin-top: 50px;
         }
 
@@ -142,7 +147,10 @@ date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
             color: #333;
         }
 
-        form input, form textarea, form select, form button {
+        form input,
+        form textarea,
+        form select,
+        form button {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -151,7 +159,9 @@ date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
             font-size: 16px;
         }
 
-        form input:focus, form textarea:focus, form select:focus {
+        form input:focus,
+        form textarea:focus,
+        form select:focus {
             outline: none;
             border-color: #003d85;
             box-shadow: 0px 0px 5px rgba(0, 61, 133, 0.5);
@@ -170,7 +180,7 @@ date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
         }
 
         form div {
-            margin-bottom: 20px; /* ריווח בין שורות */
+            margin-bottom: 20px;
         }
 
         .message {
@@ -187,13 +197,31 @@ date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
             margin-top: 15px;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const imageInput = document.getElementById('image');
+            const errorContainer = document.createElement('div');
+            errorContainer.className = 'error';
+            imageInput.parentNode.appendChild(errorContainer);
+
+            imageInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const allowed = ['image/jpeg', 'image/png', 'image/gif'];
+                    if (!allowed.includes(file.type)) {
+                        errorContainer.textContent = 'ניתן להעלות תמונות בלבד (jpg, jpeg, png, gif)';
+                        this.value = '';
+                    } else {
+                        errorContainer.textContent = '';
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-
     <div class="container">
-        <header>
-            <h1>פורטל קריאות</h1>
-        </header>
+        <header><h1>פורטל קריאות</h1></header>
         <h1>הוספת פנייה חדשה</h1>
         <form action="" method="POST" enctype="multipart/form-data">
             <div>
@@ -202,17 +230,20 @@ date_default_timezone_set('Asia/Jerusalem'); // הגדרת אזור זמן
             </div>
             <div>
                 <label for="callContent">תוכן הקריאה:</label>
-                <textarea id="callContent" name="callContent" rows="4" required></textarea>
+                <textarea id="callContent" name="callContent" rows="4" required><?php echo isset($_POST['callContent']) ? htmlspecialchars($_POST['callContent']) : ''; ?></textarea>
             </div>
             <div>
                 <label for="image">תמונה להצגה (JPG):</label>
-                <input type="file" id="image" name="image" accept=".jpg,.jpeg">
+                <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png,.gif">
+                <?php if ($imageError): ?>
+                    <div class="error"><?php echo $imageError; ?></div>
+                <?php endif; ?>
             </div>
             <div>
                 <label for="urgent">האם הקריאה דחופה?</label>
                 <select id="urgent" name="urgent" required>
-                    <option value="לא">לא</option>
-                    <option value="כן">כן</option>
+                    <option value="לא" <?php echo (isset($_POST['urgent']) && $_POST['urgent'] === 'לא') ? 'selected' : ''; ?>>לא</option>
+                    <option value="כן" <?php echo (isset($_POST['urgent']) && $_POST['urgent'] === 'כן') ? 'selected' : ''; ?>>כן</option>
                 </select>
             </div>
             <div>
